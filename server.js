@@ -18,6 +18,18 @@ const authenticateUser = (req, res, next) => {
 
 app.use(requestLogger);
 
+const router = express.Router();
+
+router.use((req, res, next) => {
+    console.log("Router-level middleware for /orders");
+    next();
+});
+
+router.get("/orders", authenticateUser, (req, res) => {
+    res.send("Here are your orders.");
+});
+
+app.use("/api", router);
 
 
 app.listen(PORT, () => {
