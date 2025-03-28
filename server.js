@@ -8,6 +8,16 @@ const requestLogger = (req, res, next) => {
     next();
 };
 
+const authenticateUser = (req, res, next) => {
+    const userAuthenticated = true; // Change to false to simulate unauthorized access
+    if (!userAuthenticated) {
+        return res.status(403).send("You are not allowed to make this request");
+    }
+    next();
+};
+
+app.use(requestLogger);
+
 
 
 app.listen(PORT, () => {
